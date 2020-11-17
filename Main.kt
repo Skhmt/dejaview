@@ -1,17 +1,9 @@
 import javafx.application.Application
 import javafx.application.Platform
-import javafx.scene.web.WebView
 import javafx.stage.Stage
-import javafx.scene.Scene
-import javafx.scene.image.Image
 import netscape.javascript.JSObject
-import javafx.concurrent.Worker
 import javafx.stage.DirectoryChooser
 import javafx.stage.FileChooser
-import javafx.stage.StageStyle
-import java.io.File
-import java.io.InputStream
-import java.net.URL
 import kotlin.system.exitProcess
 
 class JFX: Application() {
