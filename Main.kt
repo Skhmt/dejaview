@@ -9,7 +9,7 @@ import kotlin.system.exitProcess
 class JFX: Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.apply {
-            title = "DeJaVue test"
+            title = "DeJaView test"
             width = 1200.0
             height = 800.0
             centerOnScreen()
