@@ -1,4 +1,3 @@
-import javafx.application.Platform
 import javafx.concurrent.Worker
 import javafx.scene.Scene
 import javafx.scene.image.Image
