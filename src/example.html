@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10;
+        }
+        .grid {
+            display: grid;
+            padding: 20px;
+            grid-template-columns: 1fr 2fr 3fr;
+            margin-top: 0;
+            padding-top: 0;
+        }
+        textarea {
+            height: 8em;
+        }
+    </style>
+</head>
+<body>
+
+<div id="useragent"></div>
+
+<input type="text" id="output" size="100">
+
+<div class="grid">
+    <strong></strong>
+    <strong>frontend (javascript)</strong>
+    <strong>backend (kotlin)</strong>
+
+    <button onclick="dirChooser()">Dir Chooser</button>
+    <textarea>
+        _api.openDirChooser(dir => {
+            document.getElementById('output').value = dir;
+        });
+    </textarea>
+    <textarea>
+        fun openDirChooser(callback: JSObject) {
+            val dirChooser = DirectoryChooser()
+            val selectedDir = dirChooser.showDialog(stage)
+            win(callback(selectedDir.absolutePath))
+        }
+    </textarea>
+
+    <button onclick="fileChooser()">File Chooser</button>
+    <textarea>
+        _api.openFileChooser(dir => {
+            document.getElementById('output').value = dir;
+        });
+    </textarea>
+    <textarea>
+        fun openFileChooser(callback: JSObject) {
+            val fileChooser = FileChooser()
+            val selectedFile = fileChooser.showOpenDialog(stage) // or showSaveDialog
+            win(callback(selectedFile.absolutePath))
+        }
+    </textarea>
+
+    <button onclick="helloWorld()">Hello World</button>
+    <textarea>
+        document.getElementById('output').value = _api.helloWorld();
+    </textarea>
+    <textarea>
+        fun helloWorld(): String {
+            return "Hello World"
+        }
+    </textarea>
+
+    <button onclick="adder()">1+2</button>
+    <textarea>
+        _api.adderCallback(1,2,sum => {
+            document.getElementById('output').value = sum;
+        })
+    </textarea>
+    <textarea>
+        fun adderCallback(x: Int, y: Int, callback: JSObject) {
+            val sum = x + y
+            win(callback(sum))
+        }
+    </textarea>
+
+    <button onclick="minimize()">Minimize Window</button>
+    <textarea>
+        _api.minimize();
+    </textarea>
+    <textarea>
+        fun minimize() {
+            stage.isIconified = true
+        }
+    </textarea>
+
+    <button onclick="exit()">Exit</button>
+    <textarea>
+        _api.exit();
+    </textarea>
+    <textarea>
+        fun exit() {
+            Platform.exit()
+        }
+    </textarea>
+
+</div>
+<script>
+    // _api is the api
+
+    _api.log('hello from the frontend');
+
+    console.log('test');
+    console.log({"foo":"bar"});
+    console.log(null);
+    console.log(undefined);
+    console.log(true);
+    console.log(5);
+    console.log(5.123153);
+    console.log(function() { alert('test'); });
+    console.log(Date);
+    console.info('console.info');
+    console.warn('console.warn');
+    console.error('console.error');
+
+    // convenience function
+    function output(str) {
+        document.getElementById('output').value = str;
+    }
+
+    output('Output from the examples below go here');
+
+    function dirChooser() {
+        _api.openDirChooser(dir => {
+            output(dir);
+        });
+    }
+
+    function fileChooser() {
+        _api.openFileChooser(dir => {
+            output(dir);
+        });
+    }
+
+    function helloWorld() {
+        output(_api.helloWorld());
+    }
+
+    function adder() {
+        _api.adderCallback(1,2,sum => {
+            output(sum);
+        })
+    }
+
+    function minimize() {
+            _api.minimize();
+    }
+
+    function exit() {
+            _api.exit();
+    }
+
+    document.getElementById('useragent').innerHTML = navigator.userAgent;
+</script>
+</body>
+</html>
